@@ -330,7 +330,7 @@ After creating the install media, copy your EFI folder to the EFI partition of y
 2. Open Hackintool, navigate to the ```Sound``` section, then go to the bottom half where it says ```Audio Info```. There, you will find a little drop down menu that is labled ```ALC Layout ID```. Click on the drop down menu and you will find a couple different numbers to choose from. These are the potential audio layout ids that can work for your system. Make sure to keep track of them.
 3. Open OpenCore Configurator, select ```Tools``` up in the menubar, and then select ```Mount EFI```. Go to the EFI partition for your boot drive, click ```Mount Partition```, and enter your macOS password.
 4. Now, go to the menubar, select ```File```, ```Open```, and then Go to the drive that says ```EFI```, open the folder ```EFI```, double click on the ```OC``` folder and the file named ```Config.plist```.
-5. Go to ```NVRAM```, the codes listed in this section is the UUIDs. Click on the 3rd one that starts with ```7C``` and navigate to the ```boot-args``` section.
+5. Go to ```NVRAM```, the codes listed in this section are the UUIDs. Click on the 3rd one that starts with ```7C``` and navigate to the ```boot-args``` section.
 6. In the ```boot-args``` section, go to the part where it says ```Value``` , right click to open the menu and navigate to ```boot-args```, ```AppleALC```, and select ```alcid=layoutid```.
 7. Change the layoutid part of ```alcid=layoutid``` to one of the numbers presented in Hackintool (ex: ```alcid=86```), save the config.plist and restart your computer. (Make sure to go through each and every one of those ID numbers until you find the one that works the best with your system.)
 8. Congratulations, you've successfully fixed the audio for your T480! 🥳
