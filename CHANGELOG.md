@@ -21,6 +21,19 @@
 
 ## 📝 Changelog
 <details>  
+<summary><strong>📅 Version 2.2 - The ULTRA Optimization Update : 03.19.2025 </strong></summary>
+</br>
+
+### Changes
+- Fix HDMI
+- Improved stability
+- Fixes Audio Output
+- Created some guides for when I am unavailable to answer questions
+
+</details>
+
+
+<details>  
 <summary><strong>📅 Version 1.2.1: 22.06.2022</strong></summary>
 </br>
 
