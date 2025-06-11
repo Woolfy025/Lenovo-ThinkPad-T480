@@ -384,7 +384,7 @@ Required Tools: [OpenCore Configurator](https://mackie100projects.altervista.org
 <summary><strong>✅ What's working</strong></summary>
 </br>
  
-- [X] Intel WiFi & Bluetooth ([Itlwm](https://github.com/OpenIntelWireless/itlwm) + [Heliport](https://github.com/OpenIntelWireless/HeliPort/releases) for Sonoma and newer.)
+- [X] Intel WiFi & Bluetooth ([Itlwm](https://github.com/OpenIntelWireless/itlwm) + [Heliport](https://github.com/OpenIntelWireless/HeliPort/releases) for macOS Sonoma users.)
 - [X] Brightness / Volume Control
 - [X] Battery Information
 - [X] Audio (Audio Jack & Speaker)
