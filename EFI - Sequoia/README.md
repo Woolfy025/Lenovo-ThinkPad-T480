@@ -4,7 +4,7 @@
 
 What you need
 - Intel Wi-Fi Card (of course)
-- Hackintool (for device path) + your favourite plist editor (in my case, OCAuxiliaryTools)
+- Hackintool (for device path) + your favorite plist editor (in my case, OCAuxiliaryTools)
 - [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher) 
 
 1. Open Hackintool and go to the Pcie menu, look for where it says "Intel Wireless" (in my case, Wireless 8260).
