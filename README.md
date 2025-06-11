@@ -105,7 +105,7 @@ I do not endorse or condone the use of pre-configured Hackintosh Distros because
 <summary><strong> ⚠️ Important Information for any i7 and/or macOS Sonoma Users ⚠️ </strong></summary>
 </br>
 	
-### 🛜 AirPortItlwm is still not stable yet! 🛜
+### 🛜 AirPortItlwm for So is still not stable yet! 🛜
 If you're using a ThinkPad T480, T480s or X280 that either is rocking an Intel Core i7 CPU and/or is running macOS Sonoma, please be aware that the ```AirPortItlwm``` kext is **NOT STABLE** yet. What I mean is that while the kext actually functions, **you will not be able to access any iServices (iMessage, FaceTime,etc.).** In order to have any access to iServices, please use the ```itlwm``` kext along with the ```HeliPort``` application until the ```AirPortItlwm``` kext is updated.
 </details>
 
@@ -120,6 +120,45 @@ You must have the following items:
 - A pendrive with more than 4 GB (Remember that during the preparation we will format the flash drive to create the installation media).
 - an Internet connection (recommended via Ethernet).
 - 1-2 hours of your time.
+
+</details>
+
+<details>  
+<summary><strong>⚙️ macOS Sequoia Installer Guide</strong></summary>
+</br>
+
+**Since Wi-Fi does not work until you apply a post-install patch, the only way to install Sequoia is through the offline installer method.**
+
+Step 1: Download macOS Installer on Windows. Use gibMacOS to download the macOS installer.
+
+- [![Download](https://img.shields.io/badge/Download-gibmacOS-red.svg)](https://github.com/corpnewt/gibMacOS)
+- Extract and run gibMacOS.bat in Windows.
+- When the terminal opens, you’ll see a list of macOS versions. Select macOS 15 Sequoia by entering its index number.
+- Wait for the download to complete; it will save the files in a new directory.
+
+Step 2: Convert the Downloaded Files into an Installer
+
+You need to use a macOS or macOS virtual machine to convert these .pkg files into a macOS installer. Here’s how:
+
+- Copy the downloaded folder from your Windows machine to a macOS machine or a virtual macOS environment.
+- On the macOS machine:
+	Open Terminal and navigate to the folder containing the downloaded files. Run the following command:bashCopy codesudo installer -pkg InstallAssistant.pkg -target /Applications
+	This command will install the macOS installer to your Applications folder.
+	After running this command, you should now see Install macOS Sequoia in the Applications folder on macOS.
+
+- With the installer on macOS, follow these steps to make the USB bootable:
+
+	Insert the USB drive into the macOS system.
+	Open Disk Utility, select the USB drive, and format it as Mac OS Extended (Journaled) with the GUID Partition Map scheme. Name it something like MyUSB.
+	Open Terminal and run the following command, which will create a bootable USB with the macOS installer:Replace MyUSB with the name of your USB drive if different.bashCopy code sudo /Applications/Install\ macOS\ Sequoia.app/Contents/Resources/createinstallmedia --volume /Volumes/MyUSB
+	This will erase the USB and copy the installer files onto it, making it bootable.
+
+Step 3: Copy OpenCore Files to the USB Drive
+
+- Mount the USB drive, and within the EFI partition, copy over the EFI folder that you configured with OpenCore.
+Now your USB should be fully prepared to boot into macOS Sequoia via OpenCore.
+
+
 
 </details>
 
