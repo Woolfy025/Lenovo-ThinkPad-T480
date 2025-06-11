@@ -362,7 +362,7 @@ What you need
 1. Open Hackintool and go to the Pcie menu, look for where it says "Intel Wireless" (in my case, Wireless 8260).
 ![ภาพถ่ายหน้าจอ 2024-12-26 เวลา 1 49 07 AM](https://github.com/user-attachments/assets/93566ae7-5b73-47ba-8d26-b1241e8c8dda)
 
-2. Open plist editor (i'll use OCAuxiliaryTools), add device path (without #), then add the following device details:
+2. Open a .plist editor (in this case, we'll use OCAuxiliaryTools), add the device path (without #), then add the following device details:
 
 | Key   |      Data Type      |  Value |
 |----------|:-------------:|:------:|
