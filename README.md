@@ -8,13 +8,13 @@
 [![macOS](https://img.shields.io/badge/macOS-Ventura-orange.svg)](https://developer.apple.com/documentation/macos-release-notes)
 [![macOS](https://img.shields.io/badge/macOS-Sonoma-brightgreen.svg)](https://developer.apple.com/documentation/macos-release-notes)
 [![macOS](https://img.shields.io/badge/macOS-Sequoia-lightblue.svg)](https://www.apple.com/macos/macos-sequoia/) 
-[![OpenCore](https://img.shields.io/badge/OpenCore-1.0.1-blue)](https://github.com/acidanthera/OpenCorePkg)
+[![OpenCore](https://img.shields.io/badge/OpenCore-1.0.2-blue)](https://github.com/acidanthera/OpenCorePkg)
 [![License](https://img.shields.io/badge/license-MIT-purple)](/LICENSE)
 
 <p align="center">
    <strong>Status: Maintained</strong>
    <br />
-   <strong>Version: </strong>2.1
+   <strong>Version: </strong>2.2
    <br />
    <a href="https://github.com/MultimediaLucario/Lenovo-ThinkPad-T480/releases"><strong>Download now »</strong></a>
    <br />
@@ -270,10 +270,10 @@ If you want to upgrade macOS, download the desired macOS version in the Settings
 
 &nbsp;
 
-## Post-install (optional)
+## Post-Install Guide
 
 <details>  
-<summary><strong>💾 Install OpenCore to Hard drive</strong></summary>
+<summary><strong>💾 Install OpenCore to your boot drive</strong></summary>
 </br>
 
 1. Press `ALT + SPACE` and open terminal. Type `sudo diskutil mountDisk disk0s1` (where disk0s1 corresponds to the EFI partition of the main disk)
@@ -283,7 +283,7 @@ If you want to upgrade macOS, download the desired macOS version in the Settings
 </details>
 
 <details>  
-<summary><strong>✏️ Create a offline install media (Optional)</strong></summary>
+<summary><strong>✏️ Create an offline installer (Optional)</strong></summary>
 </br>
 
 In case of reinstalling macOS, a offline install media can save some time. You also don't need an Ethernet connection for the installation.
@@ -341,6 +341,41 @@ After creating the install media, copy your EFI folder to the EFI partition of y
 
 </details>
 
+<details>  
+<summary><strong> 💻 Change System Information (GenSMBIOS)  </strong></summary>
+</br>
+
+1. Run the following script in Terminal:
+
+```git clone https://github.com/corpnewt/GenSMBIOS && cd GenSMBIOS && chmod +x GenSMBIOS.command && ./GenSMBIOS.command```
+
+2. Mount your EFI partition using [OpenCore Configurator](https://mackie100projects.altervista.org/download-opencore-configurator/?doing_wp_cron=1741176165.9179310798645019531250).
+3. Go to your EFI partition, enter the EFI folder, then the OC folder and then look for the file known as ```Config.plist```.
+4. Go back to ```GenSMBIOS``` , type 2 and hit ENTER to then drag your ```Config.Plist``` file into the command line, press ENTER when finished.
+5. Type 3 to Generate SMBIOS, then press ENTER. Type ```MacbookPro15,2``` then press ENTER. Leave this Terminal window open.
+6. Type 4 to Generate UUID and press ENTER.
+7. Type 5 to Generate ROM and press ENTER.
+8. Type Q to Quit and press ENTER.
+9. Restart your ThinkPad and enjoy!
+</details>
+
+</details>
+
+<details>  
+<summary><strong> 🖥️ Intel UHD 620 Graphics Patch  </strong></summary>
+</br>
+
+## This patching guide for the Intel UHD 620 GPU not only gives you better Graphics Acceleration but it improves the docking audio and video compatibility as well.
+
+Required Tools: [OpenCore Configurator](https://mackie100projects.altervista.org/download-opencore-configurator/?doing_wp_cron=1741176165.9179310798645019531250).
+
+1. Open [OpenCore Configurator](https://mackie100projects.altervista.org/download-opencore-configurator/?doing_wp_cron=1741176165.9179310798645019531250), mount your EFI partition and open your Config.Plist file.
+2. Go to ```DeviceProperties``` and in the section that says ```Devices``` select the middle option as that is where all of the juicy iGPU information is stored.
+3. Look for the key known as ```AAPL,ig-platform-id```, select the code that is right next to it and change that from the default value to ```0000C087```.
+4. Save the ```Config.Plist``` file in [OpenCore Configurator](https://mackie100projects.altervista.org/download-opencore-configurator/?doing_wp_cron=1741176165.9179310798645019531250) and restart your ThinkPad.
+5. Congratulations, you've successfully patched the iGPU in your ThinkPad! Now you have improved performance and improved video and audio output support! 🥳
+</details>
+ 
 &nbsp;
 
 ## Status
@@ -349,7 +384,7 @@ After creating the install media, copy your EFI folder to the EFI partition of y
 <summary><strong>✅ What's working</strong></summary>
 </br>
  
-- [X] Intel WiFi & Bluetooth ([Itlwm](https://github.com/OpenIntelWireless/itlwm) + [Heliport](https://github.com/OpenIntelWireless/HeliPort/releases) for now.)
+- [X] Intel WiFi & Bluetooth ([Itlwm](https://github.com/OpenIntelWireless/itlwm) + [Heliport](https://github.com/OpenIntelWireless/HeliPort/releases) for Sonoma and newer.)
 - [X] Brightness / Volume Control
 - [X] Battery Information
 - [X] Audio (Audio Jack & Speaker)
