@@ -45,7 +45,7 @@ This repo includes multiple EFI configuations for different macOS Versions.
 | `EFI - HeliPort`  | Supports every macOS Version, Requires HeliPort app      			| `Stable`  |
 | `EFI - Broadcom`  | Supports every macOS Version (except Sonoma)		                | `Beta`    |
 | `EFI - Sonoma`    | Supports macOS Sonoma (using Itlwm and HeliPort)				| `Stable`  |
-| `EFI - Sequoia`   | Supports macOS Sequoia (using Itlwm and HeliPort)                         | `Beta`    |         
+| `EFI - Sequoia`   | Supports macOS Sequoia (AirPortItlwm works but Bluetooth doesn't yet.)    | `Beta`    |         
 
 > **Note** The Broadcom configuration is not stable. Use ```EFI``` instead for a better experience (you can also disable Airportitlwm).
 
