@@ -1,15 +1,16 @@
-# Intel Root patch instruction for sequoia
+**Intel Wi-Fi does not work on macOS Sequoia unless you install this patch.**
 
-> Credit to [ResQre](https://github.com/ResQre) for instruction
+> Credit to [ResQre](https://github.com/ResQre) for these instructions
 
 What you need
-- intel wifi card (of course)
-- hackintool (for device path) + your favourite plist editor (in my case, OCAuxiliaryTools)
+- Intel Wi-Fi Card (of course)
+- Hackintool (for device path) + your favorite plist editor (in my case, OCAuxiliaryTools)
+- [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher) 
 
-1. open hackintool and go to Pcie menu, look for intel wireless (in my case, Wireless 8260)
+1. Open Hackintool and go to the Pcie menu, look for where it says "Intel Wireless" (in my case, Wireless 8260).
 ![ภาพถ่ายหน้าจอ 2024-12-26 เวลา 1 49 07 AM](https://github.com/user-attachments/assets/93566ae7-5b73-47ba-8d26-b1241e8c8dda)
 
-2. open plist editor (i'll use OCAuxiliaryTools), add device path (without #), then add the following device details
+2. Open a .plist editor (in this case, we'll use OCAuxiliaryTools), add the device path (without #), then add the following device details:
 
 | Key   |      Data Type      |  Value |
 |----------|:-------------:|:------:|
@@ -24,17 +25,17 @@ What you need
 | subsystem-vendor-id | Data | 6B100000 |
 | vendor-xt | Data | E4140000 |
 
-it should be like this
+It should look like this:
 
 ![image](https://github.com/user-attachments/assets/2a7b1d5b-29a7-4740-aaba-9ce1eb661f3f)
 
 
-press save and reboot (no need for kext setup since it's already presents in the efi)
+Press save and reboot (no need for setting the kext up since it's already presented inside of the efi.)
 
-3. if you done the setup correctly, you should be able to install the OCLP root patch
+3. If you done the setup correctly, you should be able to install the OCLP root patch.
 
 ![ภาพถ่ายหน้าจอ 2024-12-26 เวลา 2 36 01 AM](https://github.com/user-attachments/assets/6a44dd01-c7cf-4db5-8db7-e54683529687)
 
-4. install the patch, then you can remove the spoof id (or add the # instead) and intel wifi should works without heliport
+4. Install the patch, then you can remove the spoof id (or add the # instead) and Intel Wi-Fi should work without the need for Heliport.
 
 ![ภาพถ่ายหน้าจอ 2024-12-26 เวลา 2 41 25 AM](https://github.com/user-attachments/assets/8b7edcd6-3416-4b81-8f3f-192605804a65)

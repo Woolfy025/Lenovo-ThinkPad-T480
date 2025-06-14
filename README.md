@@ -14,7 +14,7 @@
 <p align="center">
    <strong>Status: Maintained</strong>
    <br />
-   <strong>Version: </strong>2.2
+   <strong>Version: </strong>2.3
    <br />
    <a href="https://github.com/MultimediaLucario/Lenovo-ThinkPad-T480/releases"><strong>Download now »</strong></a>
    <br />
@@ -45,7 +45,7 @@ This repo includes multiple EFI configuations for different macOS Versions.
 | `EFI - HeliPort`  | Supports every macOS Version, Requires HeliPort app      			| `Stable`  |
 | `EFI - Broadcom`  | Supports every macOS Version (except Sonoma)		                | `Beta`    |
 | `EFI - Sonoma`    | Supports macOS Sonoma (using Itlwm and HeliPort)				| `Stable`  |
-| `EFI - Sequoia`   | Supports macOS Sequoia (using Itlwm and HeliPort)                         | `Beta`    |         
+| `EFI - Sequoia`   | Supports macOS Sequoia (AirPortItlwm works but Bluetooth doesn't yet.)    | `Beta`    |         
 
 > **Note** The Broadcom configuration is not stable. Use ```EFI``` instead for a better experience (you can also disable Airportitlwm).
 
@@ -105,7 +105,7 @@ I do not endorse or condone the use of pre-configured Hackintosh Distros because
 <summary><strong> ⚠️ Important Information for any i7 and/or macOS Sonoma Users ⚠️ </strong></summary>
 </br>
 	
-### 🛜 AirPortItlwm is still not stable yet! 🛜
+### 🛜 AirPortItlwm for So is still not stable yet! 🛜
 If you're using a ThinkPad T480, T480s or X280 that either is rocking an Intel Core i7 CPU and/or is running macOS Sonoma, please be aware that the ```AirPortItlwm``` kext is **NOT STABLE** yet. What I mean is that while the kext actually functions, **you will not be able to access any iServices (iMessage, FaceTime,etc.).** In order to have any access to iServices, please use the ```itlwm``` kext along with the ```HeliPort``` application until the ```AirPortItlwm``` kext is updated.
 </details>
 
@@ -120,6 +120,45 @@ You must have the following items:
 - A pendrive with more than 4 GB (Remember that during the preparation we will format the flash drive to create the installation media).
 - an Internet connection (recommended via Ethernet).
 - 1-2 hours of your time.
+
+</details>
+
+<details>  
+<summary><strong>⚙️ macOS Sequoia Installer Guide</strong></summary>
+</br>
+
+**Since Wi-Fi does not work until you apply a post-install patch, the only way to install Sequoia is through the offline installer method.**
+
+Step 1: Download macOS Installer on Windows. Use gibMacOS to download the macOS installer.
+
+- [![Download](https://img.shields.io/badge/Download-gibmacOS-red.svg)](https://github.com/corpnewt/gibMacOS)
+- Extract and run gibMacOS.bat in Windows.
+- When the terminal opens, you’ll see a list of macOS versions. Select macOS 15 Sequoia by entering its index number.
+- Wait for the download to complete; it will save the files in a new directory.
+
+Step 2: Convert the Downloaded Files into an Installer
+
+You need to use a macOS or macOS virtual machine to convert these .pkg files into a macOS installer. Here’s how:
+
+- Copy the downloaded folder from your Windows machine to a macOS machine or a virtual macOS environment.
+- On the macOS machine:
+	Open Terminal and navigate to the folder containing the downloaded files. Run the following command:bashCopy codesudo installer -pkg InstallAssistant.pkg -target /Applications
+	This command will install the macOS installer to your Applications folder.
+	After running this command, you should now see Install macOS Sequoia in the Applications folder on macOS.
+
+- With the installer on macOS, follow these steps to make the USB bootable:
+
+	Insert the USB drive into the macOS system.
+	Open Disk Utility, select the USB drive, and format it as Mac OS Extended (Journaled) with the GUID Partition Map scheme. Name it something like MyUSB.
+	Open Terminal and run the following command, which will create a bootable USB with the macOS installer:Replace MyUSB with the name of your USB drive if different.bashCopy code sudo /Applications/Install\ macOS\ Sequoia.app/Contents/Resources/createinstallmedia --volume /Volumes/MyUSB
+	This will erase the USB and copy the installer files onto it, making it bootable.
+
+Step 3: Copy OpenCore Files to the USB Drive
+
+- Mount the USB drive, and within the EFI partition, copy over the EFI folder that you configured with OpenCore.
+Now your USB should be fully prepared to boot into macOS Sequoia via OpenCore.
+
+
 
 </details>
 
@@ -306,6 +345,57 @@ After creating the install media, copy your EFI folder to the EFI partition of y
 
 </details>
 
+
+<details>  
+<summary><strong>🛜 Intel Wi-Fi Patch for macOS Sequoia </strong></summary>
+</br>
+
+**Intel Wi-Fi does not work on macOS Sequoia unless you install this patch.**
+
+> Credit to [ResQre](https://github.com/ResQre) for these instructions
+
+What you need
+- Intel Wi-Fi Card (of course)
+- Hackintool (for device path) + your favorite plist editor (in my case, OCAuxiliaryTools)
+- [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher) 
+
+1. Open Hackintool and go to the Pcie menu, look for where it says "Intel Wireless" (in my case, Wireless 8260).
+![ภาพถ่ายหน้าจอ 2024-12-26 เวลา 1 49 07 AM](https://github.com/user-attachments/assets/93566ae7-5b73-47ba-8d26-b1241e8c8dda)
+
+2. Open a .plist editor (in this case, we'll use OCAuxiliaryTools), add the device path (without #), then add the following device details:
+
+| Key   |      Data Type      |  Value |
+|----------|:-------------:|:------:|
+| IOName |  String | pci14e4,43a0|
+| compatible |    String   | pci106b,117 |
+| device-id | Data | A0430000 |
+| device_type | String | Network Controller |
+| model | String | BCM4360 802.11ac Wireless Network Adapter |
+| name | String | pci14e4,43a0 |
+| pci-aspm-default | Number | 0 |
+| subsystem-id | Data | 17010000 |
+| subsystem-vendor-id | Data | 6B100000 |
+| vendor-xt | Data | E4140000 |
+
+It should look like this:
+
+![image](https://github.com/user-attachments/assets/2a7b1d5b-29a7-4740-aaba-9ce1eb661f3f)
+
+
+Press save and reboot (no need for setting the kext up since it's already presented inside of the efi.)
+
+3. If you done the setup correctly, you should be able to install the OCLP root patch.
+
+![ภาพถ่ายหน้าจอ 2024-12-26 เวลา 2 36 01 AM](https://github.com/user-attachments/assets/6a44dd01-c7cf-4db5-8db7-e54683529687)
+
+4. Install the patch, then you can remove the spoof id (or add the # instead) and Intel Wi-Fi should work without the need for Heliport.
+
+![ภาพถ่ายหน้าจอ 2024-12-26 เวลา 2 41 25 AM](https://github.com/user-attachments/assets/8b7edcd6-3416-4b81-8f3f-192605804a65)
+
+
+</details>
+
+
 <details>  
 <summary><strong>🎧 Fix Audio </strong></summary>
 </br>
@@ -384,7 +474,7 @@ Required Tools: [OpenCore Configurator](https://mackie100projects.altervista.org
 <summary><strong>✅ What's working</strong></summary>
 </br>
  
-- [X] Intel WiFi & Bluetooth ([Itlwm](https://github.com/OpenIntelWireless/itlwm) + [Heliport](https://github.com/OpenIntelWireless/HeliPort/releases) for Sonoma and newer.)
+- [X] Intel WiFi & Bluetooth ([Itlwm](https://github.com/OpenIntelWireless/itlwm) + [Heliport](https://github.com/OpenIntelWireless/HeliPort/releases) for macOS Sonoma users.)
 - [X] Brightness / Volume Control
 - [X] Battery Information
 - [X] Audio (Audio Jack & Speaker)
