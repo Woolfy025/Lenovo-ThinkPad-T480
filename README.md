@@ -117,7 +117,7 @@ If you're using a ThinkPad T480, T480s or X280 that either is rocking an Intel C
 You must have the following items:
 - Lenovo ThinkPad T480 (Obviously 😁).
 - Access to a working Windows machine with Python installed.
-- A pendrive with more than 4 GB (Remember that during the preparation we will format the flash drive to create the installation media).
+- A pendrive with more than 4 GB (Remember that during the preparation we will format the flash drive to create the installation media). (For Sequoia and newer, you'll need a drive with 32 GB of storage because Sequoia and newer only work with the offline installer for now.)
 - an Internet connection (recommended via Ethernet).
 - 1-2 hours of your time.
 
